@@ -24,9 +24,10 @@ It also still runs under Python 2 (`python2 mimickingAnimation.py`), which it wa
 ## Play in your browser
 The program runs in a browser tab under [tak](https://github.com/Stephenson-Software/tak)'s console runtime (Python via Pyodide): https://mimicking-animation.play.danielstephenson.dev, listed with the rest at [danielstephenson.dev/play](https://danielstephenson.dev/play).
 
-The only changes made for this were turning its Python 2 `print` statements into `print(...)` calls and writing the figure's `\O/` as `\\O/` (Python 3 warns about the unescaped backslash). Both print the same text under Python 2 and Python 3. To build and serve it locally (needs `tak` installed):
+The only changes made for this were turning its Python 2 `print` statements into `print(...)` calls and writing the figure's `\O/` as `\\O/` (Python 3 warns about the unescaped backslash). Both print the same text under Python 2 and Python 3. To build and serve it locally, install `tak` at the commit CI pins, then build and serve:
 ```
+pip install "tak @ git+https://github.com/Stephenson-Software/tak@9b539d8760e2c02cc262a7dcff6d0c541572ab71"
 python3 web/build_zip.py
 python3 -c "from tak.web.serve import main; main(root='.', title='Mimicking Animation')"
 ```
-Pushes to `master` deploy it to [arcade](https://github.com/Stephenson-Software/arcade) (`.github/workflows/browser.yml`).
+Every pull request builds the bundle. Pushes to `master` deploy it to [arcade](https://github.com/Stephenson-Software/arcade) once the org variable `ARCADE_ENABLED` is `true`, and it can also be deployed by hand from the Actions tab (`.github/workflows/browser.yml`).
