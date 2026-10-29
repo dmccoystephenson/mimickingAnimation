@@ -1,9 +1,11 @@
 # @author Daniel McCoy Stephenson
 """Build the browser version of Mimicking Animation: web/index.html and web/game.zip.
 
-The game runs unmodified in the browser under tak's console runtime
-(https://github.com/Stephenson-Software/tak, tak.web.console): its output goes
-to a terminal on the page. Needs tak installed (see
+The game runs in the browser under tak's console runtime
+(https://github.com/Stephenson-Software/tak, tak.web.console) with no
+browser-specific code: its output goes to a terminal on the page. The only
+source changes from the 2017 original are the ones the README lists
+(print(...) calls and the escaped backslash in \\O/). Needs tak installed (see
 .github/workflows/browser.yml). Serve the result cross-origin isolated, e.g.
 with arcade or tak.web.serve:
 
