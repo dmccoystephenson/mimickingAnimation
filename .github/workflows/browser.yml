@@ -2,8 +2,10 @@
 # (https://github.com/Stephenson-Software/arcade, RFC 0006), where it is served at
 # https://mimicking-animation.play.danielstephenson.dev.
 #
-# Every pull request builds the bundle. A push to master deploys it once the
-# org variable ARCADE_ENABLED is 'true' (or by hand: Actions -> Run workflow).
+# Every pull request runs the program under Python 3 (warnings are errors, so an
+# unescaped backslash in the figure fails) and builds the bundle. A push to
+# master deploys it once the org variable ARCADE_ENABLED is 'true' (or by hand:
+# Actions -> Run workflow).
 # Each deploy is version.txt plus the commit, so every push is a new, immutable
 # arcade version; rollback is arcade's POST /api/games/mimicking-animation/current.
 name: Browser build
@@ -25,6 +27,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: The program runs under Python 3 without warnings
+        run: python3 -W error mimickingAnimation.py > /dev/null
       - name: Install tak (bundle builder + console runtime)
         run: pip install "tak @ git+https://github.com/Stephenson-Software/tak@9b539d8760e2c02cc262a7dcff6d0c541572ab71"
       - name: Build the browser bundle
