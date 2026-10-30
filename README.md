@@ -30,4 +30,4 @@ pip install "tak @ git+https://github.com/Stephenson-Software/tak@9b539d8760e2c0
 python3 web/build_zip.py
 python3 -c "from tak.web.serve import main; main(root='.', title='Mimicking Animation')"
 ```
-Every pull request builds the bundle. Pushes to `master` deploy it to [arcade](https://github.com/Stephenson-Software/arcade) once the org variable `ARCADE_ENABLED` is `true`, and it can also be deployed by hand from the Actions tab (`.github/workflows/browser.yml`).
+Every pull request runs the program under Python 3 and builds the bundle. Pushes to `master` deploy it to [arcade](https://github.com/Stephenson-Software/arcade) once the org variable `ARCADE_ENABLED` is `true`, and it can also be deployed by hand from the Actions tab (`.github/workflows/browser.yml`).
