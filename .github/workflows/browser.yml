@@ -3,8 +3,9 @@
 # https://mimicking-animation.play.danielstephenson.dev.
 #
 # Every pull request runs the program under Python 3 (warnings are errors, so an
-# unescaped backslash in the figure fails) and builds the bundle. A push to master deploys it once the
-# org variable ARCADE_ENABLED is 'true' (or by hand: Actions -> Run workflow).
+# unescaped backslash in the figure fails) and builds the bundle. A push to
+# master deploys it once the org variable ARCADE_ENABLED is 'true' (or by hand:
+# Actions -> Run workflow).
 # Each deploy is version.txt plus the commit, so every push is a new, immutable
 # arcade version; rollback is arcade's POST /api/games/mimicking-animation/current.
 name: Browser build
