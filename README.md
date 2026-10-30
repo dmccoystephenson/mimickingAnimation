@@ -1,6 +1,6 @@
 # Mimicking Animation
 
-[![Play in your browser](https://img.shields.io/badge/Play-in%20your%20browser-2ea44f)](https://danielstephenson.dev/play/mimicking-animation)
+[![View on danielstephenson.dev](https://img.shields.io/badge/View%20on-danielstephenson.dev-2ea44f)](https://danielstephenson.dev/projects/mimicking-animation)
 
 An ASCII stick figure walks across the terminal, one frame every 0.2 seconds, by printing blank lines and shifting the figure one space each frame. It alternates between two poses:
 ```
