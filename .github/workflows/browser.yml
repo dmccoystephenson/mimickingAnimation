@@ -4,9 +4,9 @@
 #
 # Every pull request runs the program under Python 3 (warnings are errors, so an
 # unescaped backslash in the figure fails) and Python 2 (in a container, as
-# actions/setup-python no longer offers 2.7) and builds the bundle. A push to
-# master deploys it once the org variable ARCADE_ENABLED is 'true' (or by hand:
-# Actions -> Run workflow).
+# actions/setup-python no longer offers 2.7), checks that both print the
+# original output, and builds the bundle. A push to master deploys it once the
+# org variable ARCADE_ENABLED is 'true' (or by hand: Actions -> Run workflow).
 # Each deploy is version.txt plus the commit, so every push is a new, immutable
 # arcade version; rollback is arcade's POST /api/games/mimicking-animation/current.
 name: Browser build
@@ -29,9 +29,16 @@ jobs:
         with:
           python-version: '3.12'
       - name: The program runs under Python 3 without warnings
-        run: python3 -W error mimickingAnimation.py > /dev/null
+        run: python3 -W error mimickingAnimation.py > /tmp/output-python3.txt
       - name: The program still runs under Python 2
-        run: docker run --rm -v "$PWD":/app -w /app python:2.7-slim python mimickingAnimation.py > /dev/null
+        run: docker run --rm -v "$PWD":/app -w /app python:2.7-slim python mimickingAnimation.py > /tmp/output-python2.txt
+      # The hash covers all 1610 lines; it changes only if what the program prints does.
+      - name: Both Pythons print the original output
+        run: |
+          sha256sum -c <<'EOF'
+          f740409fe33c4a1b43a04ca938aa4b9332436628dfecd1c55698220cf45e88b3  /tmp/output-python3.txt
+          f740409fe33c4a1b43a04ca938aa4b9332436628dfecd1c55698220cf45e88b3  /tmp/output-python2.txt
+          EOF
       - name: Install tak (bundle builder + console runtime)
         run: pip install "tak @ git+https://github.com/Stephenson-Software/tak@9b539d8760e2c02cc262a7dcff6d0c541572ab71"
       - name: Build the browser bundle
